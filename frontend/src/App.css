@@ -1,0 +1,21 @@
+.navbar{
+   background: #1f2828;
+   
+}
+body{
+    background-color: #77b5b8;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #265a5c;
+    border-color: #265a5c;
+}
+.btn-primary:hover,.btn-primary:active,.btn-primary:focus{
+    border-color: #193a3b;
+    background-color: #193a3b;
+}
+.projectcart{
+    width:24.2%;
+}
