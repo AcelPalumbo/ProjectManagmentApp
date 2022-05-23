@@ -24,5 +24,6 @@ urlpatterns = [
     path('projects/',include('projects.urls')),
     #path('token-auth/', obtain_jwt_token),
     path('api/', include('accounts.urls')),
+    path('boards/',include('boards.urls'))
     
 ]

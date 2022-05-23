@@ -1,29 +1,25 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import { create_bord } from '../store/actions/boards';
 
 
 
-
-function NewBoardpopup(){
+function NewBoardpopup(props){
     const [FormData, setFormData] = useState({
         title: '',
         description: '',
-        emails:''
+       
     })
-    const {title,description,emails} = FormData;
+    const {title,description} = FormData;
     
+    console.log(props.project)
     const onChange = e =>setFormData({...FormData, [e.target.name]: e.target.value})
 
     const onSubmit = e =>{
-        console.log("submit")
+        
+        props.create_bord(props.project,title,description)
     e.preventDefault();
-    const invitedMembers =
-            emails !== ""
-                ? emails.split(",").map((user) => user.trim()) // usernames and emails
-                : [];
-    
-    
-    
+   
 }
         return(
             <>
@@ -31,7 +27,7 @@ function NewBoardpopup(){
   <div className="modal-dialog modal-dialog-centered">
     <div className="modal-content">
       <div className="modal-header">
-        <h5 className="modal-title" id="NewBoardModalLabel">Nowy Projekt</h5>
+        <h5 className="modal-title" id="NewBoardModalLabel">Nowa Tablica{props.project==0 && " Personalna"}{props.project!=0 && " w Projekcie"}</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
@@ -43,10 +39,7 @@ function NewBoardpopup(){
                     <label>Opis</label>
                     <textarea className='form-control'  placeholder='description' 
                     name='description' value={description} onChange={e => onChange(e)} />
-                    <label>dodaj do projektu uzytkowników</label>
-                    <input className='form-control' placeholder='e-mails'
-                    name='emails' value={emails} onChange={e=>onChange(e)}></input>
-                     
+                   
                 </div>
                 <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
@@ -62,4 +55,4 @@ function NewBoardpopup(){
         )
 }
 
-export default (NewBoardpopup)
+export default connect(null,{create_bord})(NewBoardpopup)

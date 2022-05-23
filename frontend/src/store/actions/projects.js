@@ -1,5 +1,6 @@
 import *  as actiontypes from "../actions/actionTypes";
 import axios from 'axios';
+import { load_boards } from "./boards";
 
 export const create_project = (title,description,emails) => async dispatch=>{
     console.log("wykonuje sie tworzenie")
@@ -16,7 +17,7 @@ export const create_project = (title,description,emails) => async dispatch=>{
         };
         //console.log(config)
 
-        const body=JSON.stringify({title:title,description:description,emails:emails,owner:1})
+        const body=JSON.stringify({title:title,description:description,emails:emails,})
         try{
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/projects/`,body,config);             
             console.log("createnewproject2")
@@ -87,6 +88,7 @@ export const load_current_project =(pk) => async dispatch =>{
             type: actiontypes.PROJECT_LOADED_SUCCESS,
             payload:response.data
         })
+        dispatch(load_boards(pk))
     }
     catch (error){
         dispatch({
