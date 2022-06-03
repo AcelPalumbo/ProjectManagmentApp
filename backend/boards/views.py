@@ -48,7 +48,7 @@ class BoardList(generics.ListCreateAPIView):
                                     owner_type=ContentType.objects.get(model='user'))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 class BoardsDetail(generics.ListCreateAPIView):
-    serializer_class= TaskSerializer
+    serializer_className= TaskSerializer
 
     def get_board(self,pk):
         board=get_object_or_404(Board,pk=pk)

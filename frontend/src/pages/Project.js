@@ -2,6 +2,7 @@ import React,{ useEffect,useState } from 'react';
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import NewBoardpopup from '../components/NewBoardPopup';
+import ProjectEditPopup from '../components/ProjectEditPopup';
 
 import { load_current_project } from '../store/actions/projects';
 
@@ -28,6 +29,10 @@ const Project =(props)=>{
         offset-md-1'>
             <h2 className='display-6'>Jesteś w projekcie : {props.project?props.project.title:""}</h2>
             <p>{props.project?props.project.description:""}</p>
+             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProjectModalEdit">
+                        <i className="fa-solid fa-gear"></i> Edytuj
+                    </button>
+                    <ProjectEditPopup project={props.project?props.project:""}></ProjectEditPopup>
         
         </div>
         <div className='h-100 bg-light border rounded-3 mt-5 col-md-10 
@@ -56,14 +61,7 @@ const Project =(props)=>{
                        
                        tablica: {board.title}
                       
-                       <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  <i className="fa-solid fa-gear"></i>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Edytuj</a></li>
-    <li><a class="dropdown-item" href="#">Usuń</a></li>
-    
-  </ul>
+                      
                    </Link>
                     )):""}
                     </div>
@@ -78,12 +76,12 @@ const Project =(props)=>{
                        <Link className='boardtitle boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 pt-2' key={board.id} to={`/b/${board.id}`} >
                        tablica: {board.title}
                        
-                       <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                       <button className="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="fa-solid fa-gear"></i>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Edytuj</a></li>
-    <li><a class="dropdown-item" href="#">Usuń</a></li>
+  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a className="dropdown-item" href="#">Edytuj</a></li>
+    <li><a className="dropdown-item" href="#">Usuń</a></li>
     
   </ul>
                        

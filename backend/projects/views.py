@@ -64,7 +64,7 @@ class ProjectMembershipInvite(APIView):
                 continue
         return Response(status=status.HTTP_204_NO_CONTENT)
 class ProjectDetail(APIView):
-    serializer_class=ProjectSerializer
+    serializer_className=ProjectSerializer
     permission_classes=[IsAuthenticated]
     def get(self,request,pk):
         project=project = get_object_or_404(Project, pk=pk)

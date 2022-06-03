@@ -97,3 +97,6 @@ export const load_current_project =(pk) => async dispatch =>{
     }    
     
 }
+export const edit_project =(pk)=>async dispatch =>{
+    
+}

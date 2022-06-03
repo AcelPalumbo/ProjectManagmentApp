@@ -39,10 +39,10 @@ function NewProjectPopup({create_project}) {
             <form onSubmit={e=> onSubmit(e)}>
                 <div className='form-goup'>
                     <label>Tytuł</label>
-                    <input className='form-control'  placeholder='Title' 
+                    <input className='form-control'  placeholder='Tytuł' 
                     name='title' value={title} onChange={e => onChange(e)} required/>
                     <label>Opis</label>
-                    <textarea className='form-control'  placeholder='description' 
+                    <textarea className='form-control'  placeholder='Opis'
                     name='description' value={description} onChange={e => onChange(e)} />
                     <label>dodaj do projektu uzytkowników</label>
                     <input className='form-control' placeholder='e-mails'

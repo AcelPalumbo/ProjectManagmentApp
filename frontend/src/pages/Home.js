@@ -40,14 +40,7 @@ const Home = (props) => {
                     <h3 className='projh3 display-4'>{project.title}</h3>
                
                 
-  <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  <i className="fa-solid fa-gear"></i>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Edytuj</a></li>
-    <li><a class="dropdown-item" href="#">Usuń</a></li>
-    
-  </ul>
+ 
   </Link>
                 
                 

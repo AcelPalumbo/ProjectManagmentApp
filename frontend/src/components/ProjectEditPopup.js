@@ -1,33 +1,35 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import { create_bord } from '../store/actions/boards';
+import { edit_project } from '../store/actions/projects';
 
 
 
-function NewBoardpopup(props){
+function ProjectEditPopup(props) {
+
     const [FormData, setFormData] = useState({
-        title: '',
-        description: '',
-       
+        title: props.project.title,
+        description: props.project.description,
+        
     })
-    const {title,description} = FormData;
-    
+    const {title,description,emails} = FormData;
     console.log(props.project)
     const onChange = e =>setFormData({...FormData, [e.target.name]: e.target.value})
 
     const onSubmit = e =>{
-        
-        props.create_bord(props.project,title,description)
+        console.log("submit")
     e.preventDefault();
-   
+    
+    //create_project(title,description,invitedMembers)
+    
+    
 }
-        return(
-            <>
-<div className="modal fade " id="NewBoardModal" tabIndex="-1" aria-labelledby="NewBoardModalLabel" aria-hidden="true">
+    return (
+    <>
+<div className="modal fade " id="ProjectModalEdit" tabIndex="-1" aria-labelledby="ProjectEditModalLabel" aria-hidden="true">
   <div className="modal-dialog modal-dialog-centered">
     <div className="modal-content">
       <div className="modal-header">
-        <h5 className="modal-title" id="NewBoardModalLabel">Nowa Tablica{props.project==0 && " Personalna"}{props.project!=0 && " w Projekcie"}</h5>
+        <h5 className="modal-title" id="ProjectEditModalLabel">Edytuj Projekt</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
@@ -37,13 +39,15 @@ function NewBoardpopup(props){
                     <input className='form-control'  placeholder='Tytuł' 
                     name='title' value={title} onChange={e => onChange(e)} required/>
                     <label>Opis</label>
-                    <textarea className='form-control'  placeholder='Opis'
+                    <textarea className='form-control'  placeholder='Opis' 
                     name='description' value={description} onChange={e => onChange(e)} />
-                   
+                    
+                    
+                     
                 </div>
                 <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Utwórz</button>
+        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Zapisz</button>
       </div>
             </form>
       </div>
@@ -52,7 +56,7 @@ function NewBoardpopup(props){
     </div>
   </div>
 </div></>
-        )
+  )
 }
 
-export default connect(null,{create_bord})(NewBoardpopup)
+export default connect(null,{edit_project})(ProjectEditPopup)

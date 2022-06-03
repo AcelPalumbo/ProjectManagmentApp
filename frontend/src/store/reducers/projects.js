@@ -42,6 +42,16 @@ const initialState = {
             ...state,
             currentproject: payload,
         }
+        case actiontypes.PROJECT_EDIT_SUCCESS:
+        return{
+            ...state,
+            
+        }
+        case actiontypes.PROJECT_EDIT_FAIL:
+        return{
+            ...state,
+            
+        }
         default:
         return state
     }
