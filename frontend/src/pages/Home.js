@@ -35,11 +35,10 @@ const Home = (props) => {
         </div>
         <div className='row col-md-10 offset-md-1'>
         {props.projects?props.projects.map((project) => (
-            <div key ={project.id}className='projectcart bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2'>
-                <Link to={`/p/${project.id}`} > 
-                    <h3 className='display-4'>{project.title}</h3>
-                </Link>
-                
+            
+                <Link key ={project.id}className='projectcart projh3 bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2' to={`/p/${project.id}`} > 
+                    <h3 className='projh3 display-4'>{project.title}</h3>
+               
                 
   <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="fa-solid fa-gear"></i>
@@ -49,7 +48,8 @@ const Home = (props) => {
     <li><a class="dropdown-item" href="#">Usuń</a></li>
     
   </ul>
-</div>
+  </Link>
+                
                 
                                             
             )) : "" }

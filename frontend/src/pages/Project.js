@@ -51,10 +51,11 @@ const Project =(props)=>{
                     </button>
                     <div className='row col-md-12'>
                     {props.boards?props.boards.personal_boards.map((board) => (
-                       <div className='card boardcart p-5 border rounded-3 mt-4 me-1 ms-1 col-md-3' key={board.id}>
-                       <Link to={`/b/${board.id}`} >
+                       <Link className='boardtitle card boardcart pt-2 border rounded-3 mt-4 me-1 ms-1 col-md-3' to={`/b/${board.id}`} key={board.id} >
+                       
+                       
                        tablica: {board.title}
-                       </Link>
+                      
                        <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="fa-solid fa-gear"></i>
   </button>
@@ -63,7 +64,7 @@ const Project =(props)=>{
     <li><a class="dropdown-item" href="#">Usuń</a></li>
     
   </ul>
-                   </div>
+                   </Link>
                     )):""}
                     </div>
                 </div>
@@ -73,10 +74,10 @@ const Project =(props)=>{
                     </button>
                     <div className='row col-md-12'>
                     {props.boards?props.boards.project_boards.map((board) => (
-                       <div className='boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 p-5' key={board.id}>
-                       <Link to={`/b/${board.id}`} >
+                       
+                       <Link className='boardtitle boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 pt-2' key={board.id} to={`/b/${board.id}`} >
                        tablica: {board.title}
-                       </Link>
+                       
                        <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   <i className="fa-solid fa-gear"></i>
   </button>
@@ -86,7 +87,7 @@ const Project =(props)=>{
     
   </ul>
                        
-                   </div>
+  </Link>
                     )):""}
 
                 </div></div>

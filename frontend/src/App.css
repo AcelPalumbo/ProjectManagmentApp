@@ -25,6 +25,13 @@ body{
     width:24%;
     background-color: #abd7d9;
     position:relative;
+    min-height: 130px;
+}
+.boardcart:hover{
+  border: 1px solid #6d7275 !important;
+}
+.projectcart:hover{
+  border: 1px solid #6d7275 !important;
 }
 .taskColumn{
     background-color:#265a5c
@@ -131,4 +138,14 @@ top: 1em;
 right: 1em
 
   }
+.projh3{
+  color:black;
+  text-decoration: none;
+  font-size: 1.7em
+  
+}
+.boardtitle{
+  color:black;
+  text-decoration: none;
+}
   
