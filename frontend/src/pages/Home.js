@@ -38,6 +38,7 @@ const Home = (props) => {
                 <Link to={`/p/${project.id}`} > 
                     <h3 className='display-4'>{project.title}</h3>
                 </Link>
+                <i className="fa-solid fa-gear"></i>
             </div>                                   
             )) : "" }
         </div>

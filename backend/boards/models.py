@@ -19,3 +19,15 @@ class Board(models.Model):
 
     def __str__(self):
         return self.title
+
+class Task(models.Model):
+    STATUS = ((1,('To Execute')),
+      (2,('In Progress')),
+      (3,('Done')))
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='tasks')
+    title = models.CharField(max_length=255, blank=False, null=False)
+    description = models.TextField(blank=True, null=False)
+    created_at = models.DateTimeField(default=timezone.now)
+    state = models.PositiveSmallIntegerField(choices=STATUS, default=1)
+    def __str__(self):
+        return self.title

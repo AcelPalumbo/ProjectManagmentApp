@@ -28,7 +28,25 @@ const initialState = {
                 ...state,
                 boards: null,
             }
-        
+        case actiontypes.LOAD_CURRENT_BOARD_SUCCESS:
+            return{
+                ...state,
+                currentboard: payload,
+            }
+        case actiontypes.LOAD_CURRENT_BOARD_FAIL:
+            return{
+                 ...state,
+                 currentboard: null,
+            }
+        case actiontypes.CREATE_TASK_FAIL:
+            return{
+                ...state,
+                
+           }
+        case actiontypes.CREATE_TASK_SUCCESS:
+        return{
+            ...state,
+            }
         default:
         return state
     }

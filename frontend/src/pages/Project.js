@@ -52,7 +52,9 @@ const Project =(props)=>{
                     <div className='row col-md-12'>
                     {props.boards?props.boards.personal_boards.map((board) => (
                        <div className='card boardcart p-5 border rounded-3 mt-4 me-1 ms-1 col-md-3' key={board.id}>
+                       <Link to={`/b/${board.id}`} >
                        tablica: {board.title}
+                       </Link>
                    </div>
                     )):""}
                     </div>
@@ -64,10 +66,13 @@ const Project =(props)=>{
                     <div className='row col-md-12'>
                     {props.boards?props.boards.project_boards.map((board) => (
                        <div className='boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 p-5' key={board.id}>
+                       <Link to={`/b/${board.id}`} >
                        tablica: {board.title}
+                       </Link>
+                       
                    </div>
                     )):""}
-                    
+
                 </div></div>
                 <div className="tab-pane fade p-5" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" >
                     członkowie

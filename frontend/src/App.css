@@ -17,9 +17,109 @@ body{
     background-color: #193a3b;
 }
 .projectcart{
-    width:24.2%;
+    width:49.2%;
+    min-height: 150px;
 }
 .boardcart{
     width:24%;
     background-color: #abd7d9;
 }
+.taskColumn{
+    background-color:#265a5c
+}
+.taskTitle {
+    text-align: center;
+    font-size: 1.12rem;
+    font-weight: 400;
+    border-radius: 1em;
+    position:relative;
+    padding: 2em 1em 2em 1em;
+    background: #265a5c;
+    color: white;
+  }
+  .taskColumn {
+   
+    height: 40em;
+    overflow: scroll;
+    overflow-x: hidden !important;
+    margin: 3em;
+    border-radius: 2em;
+    background-color: rgba(27, 60, 62, 0.8);
+    border-right: 20px solid rgb(27 60 62 / 0%);
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid transparent;
+  }
+  .taskCard {
+    position: relative;
+    border-radius: 2em;
+  }
+  h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.custom-select {
+    position: absolute;
+    display: block;
+    right: 0.4em;
+    top: 43%;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    background-color: transparent;
+    z-index: 10;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  select {
+    border: none;
+    outline: none;
+    background: transparent;
+    appearance: none;
+    border-radius: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    font-size: 1.3rem;
+  }
+  .taskbtn{
+    
+    position: absolute;
+    border: 1px solid;
+    right: 1em;
+    border-radius: 3em;
+  }
+  .taskmodal {
+    background: #1b3c3e;
+    border-radius: 2em;
+  }
+  .taskmodal .modal-header,  .taskmodal .modal-footer{
+    border-bottom: none;
+    border-top: none;
+  }
+  .tables {
+    display: flex;
+    padding: 2em;
+    background: #a6aab3;
+    border-radius: 2em;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .tables > label {
+    margin-bottom: 1em;
+    color:white;
+  }
+  #NewTaskModalLabel{
+    color:white;
+  }
+  

@@ -4,7 +4,7 @@ import {logout} from '../store/actions/auth'
 import {connect} from 'react-redux'
 
 const Navbar = (props) => {
-    
+    const timerHeaderString = JSON.stringify(props.timeHeader);
     const userLinks=()=>(
         
         <Fragment>
@@ -36,6 +36,7 @@ const Navbar = (props) => {
                     {props.isAuthenticated ? userLinks() : guestLinks()}
                     
                 </div>
+                
                 </div>
             </div>
         </nav>
