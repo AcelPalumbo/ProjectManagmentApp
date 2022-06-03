@@ -90,7 +90,7 @@ const Project =(props)=>{
 
                 </div></div>
                 <div className="tab-pane fade p-5" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" >
-                    członkowie
+                    Członkowie
                     <div className='row'>
                         Właściciel: {props.project?props.project.owner.username:""}
                     </div>
