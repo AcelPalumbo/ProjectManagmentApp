@@ -25,6 +25,7 @@ const Home = (props) => {
     //console.log(props.projects)
     return(
     <div className='container'>
+        
         <div className='h-100 p-5 bg-light border rounded-3 mt-5 col-md-10 
         offset-md-1'>
             <h1 className='display-4'>Witaj w</h1>
@@ -38,8 +39,19 @@ const Home = (props) => {
                 <Link to={`/p/${project.id}`} > 
                     <h3 className='display-4'>{project.title}</h3>
                 </Link>
-                <i className="fa-solid fa-gear"></i>
-            </div>                                   
+                
+                
+  <button class="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <i className="fa-solid fa-gear"></i>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Edytuj</a></li>
+    <li><a class="dropdown-item" href="#">Usuń</a></li>
+    
+  </ul>
+</div>
+                
+                                            
             )) : "" }
         </div>
         

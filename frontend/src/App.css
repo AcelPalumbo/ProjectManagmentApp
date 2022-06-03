@@ -19,10 +19,12 @@ body{
 .projectcart{
     width:49.2%;
     min-height: 150px;
+    position: relative;
 }
 .boardcart{
     width:24%;
     background-color: #abd7d9;
+    position:relative;
 }
 .taskColumn{
     background-color:#265a5c
@@ -121,5 +123,12 @@ body{
   }
   #NewTaskModalLabel{
     color:white;
+  }
+  .projsettbtn{
+position: absolute;
+
+top: 1em;
+right: 1em
+
   }
   
