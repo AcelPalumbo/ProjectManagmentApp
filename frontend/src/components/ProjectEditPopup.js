@@ -19,7 +19,7 @@ function ProjectEditPopup(props) {
         console.log("submit")
     e.preventDefault();
     
-    //create_project(title,description,invitedMembers)
+    props.edit_project(props.project.id,title,description)
     
     
 }
@@ -40,10 +40,7 @@ function ProjectEditPopup(props) {
                     name='title' value={title} onChange={e => onChange(e)} required/>
                     <label>Opis</label>
                     <textarea className='form-control'  placeholder='Opis' 
-                    name='description' value={description} onChange={e => onChange(e)} />
-                    
-                    
-                     
+                    name='description' value={description} onChange={e => onChange(e)} />                     
                 </div>
                 <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
@@ -58,5 +55,9 @@ function ProjectEditPopup(props) {
 </div></>
   )
 }
-
-export default connect(null,{edit_project})(ProjectEditPopup)
+const mapStateToProps=state=>({
+  project:state.projects.currentproject,
+  
+  
+})
+export default connect(mapStateToProps,{edit_project})(ProjectEditPopup)

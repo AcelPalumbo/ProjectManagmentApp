@@ -1,6 +1,10 @@
+from asyncio.windows_events import NULL
+from contextlib import nullcontext
 from rest_framework import serializers
 from projects.models import Project, ProjectMembership
 from accounts.serializers import UserSerializer
+from django_middleware_global_request.middleware import get_request
+
 
 class ProjectMembershipSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(
@@ -25,7 +29,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_members(self, obj):
         queryset = ProjectMembership.objects.filter(project=obj)
-        return ProjectMembershipSerializer(queryset, many=True, context={"request": self.context['request']}).data
+        
+        return ProjectMembershipSerializer(queryset, many=True, context={"request": get_request()}).data
 
     class Meta:
         model = Project

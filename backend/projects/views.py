@@ -67,9 +67,14 @@ class ProjectDetail(APIView):
     serializer_className=ProjectSerializer
     permission_classes=[IsAuthenticated]
     def get(self,request,pk):
-        project=project = get_object_or_404(Project, pk=pk)
+        project = get_object_or_404(Project, pk=pk)
         serializer = ProjectSerializer(project, context={"request": request})
         return Response(serializer.data)
-    
-
+    def put(self,request,pk):
+        project= get_object_or_404(Project, pk=pk)
+        serializer = ProjectSerializer(project, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

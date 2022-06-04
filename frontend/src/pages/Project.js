@@ -25,14 +25,14 @@ const Project =(props)=>{
     return(
         <>
         <div className='container'>
-            <div className='h-100 p-5 bg-light border rounded-3 mt-5 col-md-10 
+            <div className='relcon h-100 p-5 bg-light border rounded-3 mt-5 col-md-10 
         offset-md-1'>
             <h2 className='display-6'>Jesteś w projekcie : {props.project?props.project.title:""}</h2>
             <p>{props.project?props.project.description:""}</p>
-             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProjectModalEdit">
+             <button type="button" className="projeditbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProjectModalEdit">
                         <i className="fa-solid fa-gear"></i> Edytuj
                     </button>
-                    <ProjectEditPopup project={props.project?props.project:""}></ProjectEditPopup>
+                    <ProjectEditPopup ></ProjectEditPopup>
         
         </div>
         <div className='h-100 bg-light border rounded-3 mt-5 col-md-10 

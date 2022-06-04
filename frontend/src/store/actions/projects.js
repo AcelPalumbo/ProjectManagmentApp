@@ -97,6 +97,31 @@ export const load_current_project =(pk) => async dispatch =>{
     }    
     
 }
-export const edit_project =(pk)=>async dispatch =>{
-    
+export const edit_project =(pk, title,description)=>async dispatch =>{
+    const config ={
+        headers:{
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+            'Authorization': 'JWT ' + localStorage.getItem('access')
+        }
+    }
+    const body=JSON.stringify({title:title, description:description})
+    try{
+        const response = await axios.put(`${process.env.REACT_APP_API_URL}/projects/${pk}/`,body,config);             
+        console.log("updateproject")
+        console.log(response)
+        
+        dispatch({
+            type: actiontypes.PROJECT_EDIT_SUCCESS,
+            //payload: response.data
+
+        })
+        dispatch(load_current_project(pk))
+    }
+    catch (error){
+        dispatch({
+            type: actiontypes.PROJECT_EDIT_FAIL,
+        })
+    }
+     
 }

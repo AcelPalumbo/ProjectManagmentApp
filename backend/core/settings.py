@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    
+    'django_middleware_global_request',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -73,6 +73,7 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
      # CORS
     'corsheaders.middleware.CorsMiddleware',
+    'django_middleware_global_request.middleware.GlobalRequestMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
