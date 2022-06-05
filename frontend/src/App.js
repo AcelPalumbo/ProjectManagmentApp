@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Project from "./pages/Project";
+import RegisterPage from "./pages/RegisterPage";
 import Board from "./pages/Board";
 import Page404 from "./pages/Page404";
 import Layout from './components/Layout';
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path="/p/:id" component={Project}/>
                 <Route path="/b/:id" component={Board}/>
                 <Route path="/login" component={Login} />
+                <Route path="/register" component={RegisterPage} />
                 <Route component={Page404} />
             </Switch>
             </Layout>

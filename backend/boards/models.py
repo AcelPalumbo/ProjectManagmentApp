@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
-
+from projects.models  import Project
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -11,6 +11,7 @@ class Board(models.Model):
     owner_type = models.ForeignKey(ContentType,on_delete=models.CASCADE, limit_choices_to=limit)
     owner_id = models.PositiveIntegerField(null=False, blank=False)
     owner = GenericForeignKey('owner_type', 'owner_id')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, default=None, null=True)
 
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=False)

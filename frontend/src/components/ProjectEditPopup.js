@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import {connect} from 'react-redux'
 import { edit_project } from '../store/actions/projects';
 
@@ -7,16 +7,20 @@ import { edit_project } from '../store/actions/projects';
 function ProjectEditPopup(props) {
 
     const [FormData, setFormData] = useState({
-        title: props.project.title,
-        description: props.project.description,
+        title: "",
+        description: "",
         
     })
-    const {title,description,emails} = FormData;
-    console.log(props.project)
+    useEffect(() => {
+      setFormData({...FormData, "title": props.project.title,"description": props.project.description});
+    }, [props]);
+
+    const {title,description} = FormData;
+    //console.log(props.project)
     const onChange = e =>setFormData({...FormData, [e.target.name]: e.target.value})
 
     const onSubmit = e =>{
-        console.log("submit")
+        //console.log("submit")
     e.preventDefault();
     
     props.edit_project(props.project.id,title,description)
@@ -55,9 +59,5 @@ function ProjectEditPopup(props) {
 </div></>
   )
 }
-const mapStateToProps=state=>({
-  project:state.projects.currentproject,
-  
-  
-})
-export default connect(mapStateToProps,{edit_project})(ProjectEditPopup)
+
+export default connect(null,{edit_project})(ProjectEditPopup)

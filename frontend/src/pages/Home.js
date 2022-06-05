@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 import NewProjectPopup from '../components/NewProjectPopup';
 import projects from '../store/reducers/projects';
+import ProjectDeletePopup from '../components/ProjectDeletePopup';
 
 const Home = (props) => {
     //const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     if (props.isAuthenticated!=null){
     }
+    
     const loginButton=()=>(
         <Fragment>
         <Link className='btn btn-primary btn-lg' to='/login' role='button'>Zaloguj się</Link>
@@ -22,8 +24,11 @@ const Home = (props) => {
             <NewProjectPopup></NewProjectPopup>
         </>
     )
+    const [deleteProject, setdeleteProject] = useState(0);
+    const [projectName,setprojectname]=useState(0);
     //console.log(props.projects)
     return(
+
     <div className='container'>
         
         <div className='h-100 p-5 bg-light border rounded-3 mt-5 col-md-10 
@@ -35,19 +40,23 @@ const Home = (props) => {
         </div>
         <div className='row col-md-10 offset-md-1'>
         {props.projects?props.projects.map((project) => (
-            
-                <Link key ={project.id}className='projectcart projh3 bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2' to={`/p/${project.id}`} > 
-                    <h3 className='projh3 display-4'>{project.title}</h3>
-               
-                
- 
-  </Link>
-                
+                <div className="projectcart bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2">
+                <Link key ={project.id}className=' projh3 ' to={`/p/${project.id}`} > 
+                    <h3 className='display-4'>{project.title}</h3>
+                    
+                </Link>
+                <button type="button" className="dlbtn btn btn-primary" name={project.id}
+                    data-bs-toggle="modal" data-bs-target="#ProjectDeleteModal"
+                    onClick={ ()=>{setdeleteProject(project.id);setprojectname(project.title)}}
+                    >
+            <i className="fa-solid fa-x"></i>
+            </button>
+                </div>
                 
                                             
             )) : "" }
         </div>
-        
+        <ProjectDeletePopup projectid={deleteProject} projectname={projectName} ></ProjectDeletePopup> 
     </div>)
 };
 const mapStateToProps=state =>({

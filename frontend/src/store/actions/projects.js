@@ -125,3 +125,30 @@ export const edit_project =(pk, title,description)=>async dispatch =>{
     }
      
 }
+export const delete_project =(pk)=>async dispatch =>{
+    const config ={
+        headers:{
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+            'Authorization': 'JWT ' + localStorage.getItem('access')
+        }
+    }
+    
+    try{
+        const response = await axios.delete(`${process.env.REACT_APP_API_URL}/projects/${pk}/`,config);             
+        console.log("deleteproject")
+        console.log(response)
+        
+        dispatch({
+            type: actiontypes.PROJECT_DELETE_SUCCESS,
+            //payload: response.data
+
+        })
+        dispatch(load_projects())
+    }
+    catch (error){
+        dispatch({
+            type: actiontypes.PROJECT_DELETE_FAIL,
+        })
+    }
+}

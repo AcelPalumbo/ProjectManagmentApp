@@ -32,17 +32,19 @@ const Project =(props)=>{
              <button type="button" className="projeditbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProjectModalEdit">
                         <i className="fa-solid fa-gear"></i> Edytuj
                     </button>
-                    <ProjectEditPopup ></ProjectEditPopup>
+                    {props.project?<ProjectEditPopup project={props.project}></ProjectEditPopup>:null}
+                    
         
         </div>
         <div className='h-100 bg-light border rounded-3 mt-5 col-md-10 
         offset-md-1'> 
             <ul className="nav nav-tabs" id="myTab" role="tablist">
+               
                 <li className="nav-item" role="presentation">
-                    <button  onClick={()=>{setBoardProject(0); }} className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Twoje tablice</button>
+                    <button onClick={()=>{setBoardProject(id); }} className="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Tablice projektu</button>
                 </li>
                 <li className="nav-item" role="presentation">
-                    <button onClick={()=>{setBoardProject(id); }} className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Tablice projektu</button>
+                    <button  onClick={()=>{setBoardProject(0); }} className="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Twoje tablice</button>
                 </li>
                 <li className="nav-item" role="presentation">
                     <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Członkowie projektu</button>
@@ -50,7 +52,7 @@ const Project =(props)=>{
                 
             </ul>
                 <div className="tab-content" id="myTabContent">
-                <div className="tab-pane fade show active p-5" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" >
+                <div className="tab-pane fade  p-5" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" >
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewBoardModal">
                         <i className="fa-solid fa-plus"></i> Nowa tablica
                     </button>
@@ -66,7 +68,7 @@ const Project =(props)=>{
                     )):""}
                     </div>
                 </div>
-                <div className="tab-pane fade p-5" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" >
+                <div className="tab-pane fade show active p-5" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" >
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewBoardModal">
                         <i className="fa-solid fa-plus"></i> Nowa tablica
                     </button>
