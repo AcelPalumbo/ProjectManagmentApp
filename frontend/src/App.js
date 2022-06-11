@@ -13,6 +13,7 @@ import Layout from './components/Layout';
 import Store from './store/store'
 import {Provider} from 'react-redux'
 
+
 const App = () => {
 
     return (

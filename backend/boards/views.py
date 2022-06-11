@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.db.models import Case, Q, When
 
@@ -22,6 +23,7 @@ class BoardList(generics.ListCreateAPIView):
     def list(self, *args, **kwargs):
         #print(self.request.GET)
         project_id = self.request.GET.get('pk', None)
+        #project_id = self.kwargs.get('pk')
         #print(project_id)
         personal_boards=Board.objects.filter(
                 owner_id=self.request.user.id, owner_type=ContentType.objects.get(model='user'))
@@ -47,16 +49,35 @@ class BoardList(generics.ListCreateAPIView):
                     serializer.save(owner_id=request.user.id,
                                     owner_type=ContentType.objects.get(model='user'))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-class BoardsDetail(generics.ListCreateAPIView):
-    serializer_className= TaskSerializer
-
-    def get_board(self,pk):
-        board=get_object_or_404(Board,pk=pk)
-        return board
+class BoardDetail(APIView):
+    serializer_class = ShortBoardSerializer
     
+    def get(self,request,*args, **kwargs):
+        pk = self.kwargs.get('pk')
+        board = get_object_or_404(Board, pk=pk)
+        serializer = ShortBoardSerializer(board, context={"request": request})
+        return Response(serializer.data)
+    def put(self,request,pk):
+        Tas =get_object_or_404(Board,pk=pk)
+        serializer=ShortBoardSerializer(Tas,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, pk):
+        board = get_object_or_404(Board, pk=pk)
+        
+        board.delete()
+        return Response(status=status.HTTP_200_OK)
+    
+
+class TaskList(generics.ListCreateAPIView):
+    serializer_className= TaskSerializer
+   
     def list(self, *args, **kwargs):
 
-        board=self.kwargs.get('pk')
+        #board=self.kwargs.get('pk')
+        board = self.request.GET.get('pk', None)
         
         tasks=Task.objects.filter(board=board)
         toExecutelist=list(Task.objects.filter(board=board, state=1).values())
@@ -67,7 +88,7 @@ class BoardsDetail(generics.ListCreateAPIView):
                      "doneList":doneList},
                     status=status.HTTP_200_OK)
     def post(self,request,*args, **kwargs):
-        board_id=self.kwargs.get('pk')
+        board_id=self.request.GET.get('pk', None)
         serializer=TaskSerializer(data=request.data, context={"request":request})
         if serializer.is_valid():
             
@@ -75,12 +96,21 @@ class BoardsDetail(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)  
 
 class TaskDetail(APIView):
-    serializer_class = ShortTaskSerializer
+    
     
 
     def put(self,request,pk):
+        req_data = self.request.data
+        print(req_data)
         Tas =get_object_or_404(Task,pk=pk)
-        serializer=ShortTaskSerializer(Tas,data=request.data)
+        if "state" in req_data:
+            serializer=ShortTaskSerializer(Tas,data=request.data,remove_fields=['id','board','title','description'])
+        if "title" in req_data:
+            serializer=ShortTaskSerializer(Tas,data=request.data,remove_fields=['id','board','state','description'])
+        if "description" in req_data:
+            serializer=ShortTaskSerializer(Tas,data=request.data,remove_fields=['id','board','state','title'])
+        
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

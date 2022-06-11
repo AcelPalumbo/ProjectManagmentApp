@@ -107,7 +107,7 @@ body{
     border-radius: 3em;
   }
   .taskmodal {
-    background: #1b3c3e;
+    background: #6d8b8d;
     border-radius: 2em;
   }
   .taskmodal .modal-header,  .taskmodal .modal-footer{
@@ -163,5 +163,64 @@ right: 1em
     top: 1.2em;
     right: 1.2em;
 }
+.boardh{
+  background: #265a5c;
+    color: white;
+    border-radius: 1em;
+    border:none;
+}
+.boardeditbtn{
+  position: absolute;
+  top:10em;
+  right:2em;
+  border-radius: 3em;
 
+}
+.taskCard:hover{
+  border: 1px solid black!important;
   
+}
+.fa-save-button,.fa-edit-button,.fa-cancel-button{
+  border-radius: 3em;
+  margin-right: 1px;
+  /* color: white; */
+  border: 1px solid #265a5c;
+    /* background-color: ; */
+    min-width: 2em;
+    min-height: 2em
+
+}
+input[editext="input"] {
+  
+  height: 2em;
+}
+div[editext="input"] {
+  
+  height: 2em;
+}
+.edittaskview{
+  display: flex;
+  padding: 1.5em;
+  background: #a6aab3;
+  border-radius: 2em;
+ margin-bottom:1em;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  color:white;
+
+}
+.edittaskview >div[editext="view"]{
+  min-width: 90%;
+}
+.TaskEdittexttitle>div[editext="view"]{
+  font-size: 1.2em;
+}  
+.setcomment{
+width:100%;
+border-radius: 1em;
+}
+.comment{
+  border-radius: 1em;
+  width:100%;
+}

@@ -2,13 +2,17 @@ import React,{ useEffect,useState } from 'react';
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import NewBoardpopup from '../components/NewBoardPopup';
+import BoardDeletePopup from '../components/BoardDeletePopup';
 import ProjectEditPopup from '../components/ProjectEditPopup';
 
 import { load_current_project } from '../store/actions/projects';
 
 const Project =(props)=>{
-    const [boardProject, setBoardProject] = useState(0);
     const{id}=props.match.params 
+    const [boardProject, setBoardProject] = useState(id);
+    const[boardName, setBoardName]=useState(0)
+    const[boardId,setDeleteBoard]= useState(0)
+    
     useEffect(()=>{
         const{id}=props.match.params
         props.load_current_project(id)
@@ -58,13 +62,21 @@ const Project =(props)=>{
                     </button>
                     <div className='row col-md-12'>
                     {props.boards?props.boards.personal_boards.map((board) => (
-                       <Link className='boardtitle card boardcart pt-2 border rounded-3 mt-4 me-1 ms-1 col-md-3' to={`/b/${board.id}`} key={board.id} >
+                       <div className='card boardcart pt-2 border rounded-3 mt-4 me-1 ms-1 col-md-3' key={board.id}>
+                       <Link className='boardtitle ' to={`/b/${board.id}`}  >
                        
                        
                        tablica: {board.title}
                       
                       
                    </Link>
+                   <button type="button" className="dlbtn btn btn-primary" 
+                   data-bs-toggle="modal" data-bs-target="#BoardDeleteModal"
+                   onClick={ ()=>{setDeleteBoard(board.id);setBoardName(board.title)}}
+                   >
+                 <i className="fa-solid fa-x"></i>
+                 </button>
+                 </div>
                     )):""}
                     </div>
                 </div>
@@ -74,20 +86,19 @@ const Project =(props)=>{
                     </button>
                     <div className='row col-md-12'>
                     {props.boards?props.boards.project_boards.map((board) => (
-                       
-                       <Link className='boardtitle boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 pt-2' key={board.id} to={`/b/${board.id}`} >
+                       <div className='boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 pt-2' key={board.id}>
+                       <Link className='boardtitle '  to={`/b/${board.id}`} >
                        tablica: {board.title}
                        
-                       <button className="projsettbtn btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  <i className="fa-solid fa-gear"></i>
-  </button>
-  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a className="dropdown-item" href="#">Edytuj</a></li>
-    <li><a className="dropdown-item" href="#">Usuń</a></li>
-    
-  </ul>
                        
   </Link>
+  <button type="button" className="dlbtn btn btn-primary" 
+  data-bs-toggle="modal" data-bs-target="#BoardDeleteModal"
+  onClick={ ()=>{setDeleteBoard(board.id);setBoardName(board.title)}}
+  >
+<i className="fa-solid fa-x"></i>
+</button>
+</div>
                     )):""}
 
                 </div></div>
@@ -107,6 +118,7 @@ const Project =(props)=>{
         </div>
         </div>
         <NewBoardpopup project={boardProject}></NewBoardpopup>
+        <BoardDeletePopup projectid={id} board={boardId} boardName={boardName}></BoardDeletePopup>
         </>
 
     )

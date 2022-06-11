@@ -2,7 +2,8 @@ import *  as actiontypes from "../actions/actionTypes";
 
 const initialState = {
     boards: null,
-    currentboard:null
+    currentboard:null,
+    currentboarddetail:null
 
   };
 
@@ -47,6 +48,11 @@ const initialState = {
         return{
             ...state,
             }
+        case actiontypes.LOAD_CURRENT_BOARD_DETAIL_SUCCESS:
+            return{
+                ...state,
+                currentboarddetail: payload,
+           }
         default:
         return state
     }

@@ -40,8 +40,8 @@ const Home = (props) => {
         </div>
         <div className='row col-md-10 offset-md-1'>
         {props.projects?props.projects.map((project) => (
-                <div className="projectcart bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2">
-                <Link key ={project.id}className=' projh3 ' to={`/p/${project.id}`} > 
+                <div key ={project.id} className="projectcart bg-light border rounded-3 mt-4 me-1 ms-1 col-md-3 p-2">
+                <Link className=' projh3 ' to={`/p/${project.id}`} > 
                     <h3 className='display-4'>{project.title}</h3>
                     
                 </Link>

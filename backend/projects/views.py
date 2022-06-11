@@ -79,7 +79,7 @@ class ProjectDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def delete(self, request, pk):
         proj = get_object_or_404(Project, pk=pk)
-        self.check_object_permissions(self.request, proj)
+        #self.check_object_permissions(self.request, proj)
         proj.delete()
         return Response(status=status.HTTP_200_OK)
     
