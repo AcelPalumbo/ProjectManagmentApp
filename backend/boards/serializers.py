@@ -3,7 +3,7 @@ from rest_framework import serializers
 from accounts.models import User
 from accounts.serializers import UserSerializer
 from projects.models import Project
-from .models import Board, Task
+from .models import Board, Task, Comment
 from django.utils.module_loading import import_string
 
 
@@ -40,5 +40,10 @@ class ShortTaskSerializer(serializers.ModelSerializer):
         model = Task
         fields =['id','board','title','description','state']
     
-    
+class CommentSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    class Meta:
+        model = Comment
+        exclude = ['task']
         

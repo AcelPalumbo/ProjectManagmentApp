@@ -1,4 +1,5 @@
 from dataclasses import field
+from xml.etree.ElementTree import Comment
 from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.db.models import Case, Q, When
 
@@ -7,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, permissions, serializers, status
 from rest_framework.exceptions import PermissionDenied
-from .serializers import ShortBoardSerializer, TaskSerializer,ShortTaskSerializer
-from .models import Board,Task
+from .serializers import ShortBoardSerializer, TaskSerializer,ShortTaskSerializer, CommentSerializer
+from .models import Board,Task,Comment
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -115,4 +116,41 @@ class TaskDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CommentList(generics.ListCreateAPIView):
+
+    serializer_class = CommentSerializer
+    
+
+    def get_task(self, pk):
+        task = get_object_or_404(Task, pk=pk)
+        
+        return task
+
+    def get_queryset(self, *args, **kwargs):
+
+        task_id = self.request.GET.get('task', None)
+
+        task = self.get_task(task_id)
+        return Comment.objects.filter(task=task)
+
+    def get(self, request, *args, **kwargs):
+
+        task_id = self.request.GET.get('task', None)
+
+        if task_id is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if 'task' in request.data.keys():
+            print("helooo")
+            task = self.get_task(request.data['task'])
+            return super().post(request, *args, **kwargs)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def perform_create(self, serializer):
+        task = self.get_task(self.request.data['task'])
+        serializer.save(task=task, author=self.request.user)
 

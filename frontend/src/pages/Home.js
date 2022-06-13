@@ -7,8 +7,10 @@ import ProjectDeletePopup from '../components/ProjectDeletePopup';
 
 const Home = (props) => {
     //const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-    if (props.isAuthenticated!=null){
-    }
+    
+    // if (isAdmin==null){
+    //     console.log("hellooo")
+    // }
     
     const loginButton=()=>(
         <Fragment>
@@ -17,11 +19,11 @@ const Home = (props) => {
     )
     const userstaff=()=>(
         <>
-            
+            {props.user?props.user.isAdmin ==true && <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewProjectModal">
             <i className="fa-solid fa-plus"></i> Nowy Projekt
             </button>
-            <NewProjectPopup></NewProjectPopup>
+            <NewProjectPopup></NewProjectPopup></>:""}
         </>
     )
     const [deleteProject, setdeleteProject] = useState(0);
@@ -45,12 +47,14 @@ const Home = (props) => {
                     <h3 className='display-4'>{project.title}</h3>
                     
                 </Link>
+                {props.user?props.user.isAdmin ==true && <>
                 <button type="button" className="dlbtn btn btn-primary" name={project.id}
                     data-bs-toggle="modal" data-bs-target="#ProjectDeleteModal"
                     onClick={ ()=>{setdeleteProject(project.id);setprojectname(project.title)}}
                     >
             <i className="fa-solid fa-x"></i>
-            </button>
+            </button></>:""}
+            
                 </div>
                 
                                             
@@ -59,9 +63,10 @@ const Home = (props) => {
         <ProjectDeletePopup projectid={deleteProject} projectname={projectName} ></ProjectDeletePopup> 
     </div>)
 };
-const mapStateToProps=state =>({
+const mapStateToProps=(state) =>({
     isAuthenticated:state.auth.isAuthenticated,
-    projects:state.projects.projects
+    user:state.auth.user,
+    projects:state.projects.projects,
     
 })
 export default connect(mapStateToProps,{})(Home);

@@ -9,6 +9,7 @@ from django_middleware_global_request.middleware import get_request
 class ProjectMembershipSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(
         source='member.full_name', read_only=True)
+    
     username = serializers.CharField(source='member.username', read_only=True)
     email = serializers.CharField(source='member.email', read_only=True)
     profile_pic = serializers.SerializerMethodField()
@@ -39,7 +40,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             'owner',
             'title',
             'description',
-            'members'
+            'members',
         ]
         read_only_fields = ['owner']
 

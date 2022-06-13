@@ -213,3 +213,56 @@ export const edit_board =(pk, title,description)=>async dispatch =>{
     }
      
 }
+//comments
+export const create_comment = (commentbody,id)=> async dispatch=>{
+    const config={
+        headers:{
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+            'Authorization': 'JWT ' + localStorage.getItem('access')
+        }
+    };
+    
+        try{
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/boards/comments/`,commentbody,config);             
+            console.log("creatcommentk")
+            console.log(response)
+            
+            dispatch({
+                type: actiontypes.CREATE_COMMENT_SUCCESS,
+                payload: response.data
+
+            })
+            dispatch(get_comments(id))
+        }
+        catch (error){
+            dispatch({
+                type: actiontypes.CREATE_COMMENT_FAIL,
+            })
+        }
+}
+export const get_comments=(pk)=> async dispatch=>{
+    const config={
+        headers:{
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+            'Authorization': 'JWT ' + localStorage.getItem('access')
+        }
+    };
+    try{
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/boards/comments/?task=${pk}`,config);             
+        console.log("getcomments")
+        console.log(response)
+        
+        dispatch({
+            type: actiontypes.GET_COMMENTS_SUCCESS,
+            payload: response.data
+
+        })
+    }
+    catch (error){
+        dispatch({
+            type: actiontypes.GET_COMMENTS_FAIL,
+        })
+    }
+}

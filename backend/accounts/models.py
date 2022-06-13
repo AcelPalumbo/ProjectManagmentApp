@@ -1,3 +1,4 @@
+from xml.etree.ElementInclude import default_loader
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -11,6 +12,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=255, blank=False, null=False)
     last_name = models.CharField(max_length=255, blank=False, null=False)
     profile_pic = models.ImageField(blank=True, upload_to='profile_pics')
+    isAdmin = models.BooleanField( default=None, null=True)
     
     @property
     def full_name(self):

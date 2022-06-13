@@ -3,21 +3,29 @@ import {connect} from 'react-redux'
 import { edit_board } from '../store/actions/boards';
 import EdiText from 'react-editext';
 import { update_task } from '../store/actions/boards';
-
+import { create_comment ,get_comments} from '../store/actions/boards';
 
 
 function TaskEditPopup(props) {
 
     const [FormData, setFormData] = useState({
-        title: "",
-        description: "",
+        comment: "",
+       
         
     })
-    
+    const onChange = e =>setFormData({...FormData, [e.target.name]: e.target.value})
+
   const handleSave = e => {
     console.log('Edited Value -> ', e);
     
   };
+  const onSubmit = e =>{
+    console.log("submit")
+    
+    e.preventDefault();
+    props.create_comment({task:props.task.id,body:FormData.comment},props.task.id)
+    setFormData({comment:""})
+}
     return (
     <>
 <div className="modal fade" id="TaskModalEdit" tabIndex="-1" aria-labelledby="TaskModalEditLabel" aria-hidden="true">
@@ -28,7 +36,7 @@ function TaskEditPopup(props) {
         <button type="button" className="btn-close taskbtnclose" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
-      <EdiText name="xx" submitOnUnfocus editOnViewClick={true}
+      <EdiText  submitOnUnfocus editOnViewClick={true}
                     viewContainerClassName='edittaskview TaskEdittexttitle'
                     cancelButtonContent={<i className="fa fa-x"></i>}
                     saveButtonContent={<i className="fa fa-check"></i>}
@@ -51,27 +59,26 @@ function TaskEditPopup(props) {
             
       </div>
       <div className="modal-footer">
-        <div class="comment card p-3">
+      <div className='commntsdiv'>
+      {props.comments?props.comments.map((comment) => (
+        <div class="comment card p-1 mb-1">
+        
             <div class="d-flex justify-content-between align-items-center">
                 <div class="user d-flex flex-row align-items-center">
-                <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"/>
-                <span><small class="font-weight-bold text-primary">james_olesenn</small> <small class="font-weight-bold">Hmm, This poster looks cool</small></span>                        
+                <img src="https://i.imgur.com/q52cLwE.png" width="30" class="user-img rounded-circle mr-2"/>
+                <span><small class="font-weight-bold text-primary">{comment.author.username}</small> <small class="font-weight-bold">{comment.body}</small></span>                        
                 </div>
-                <small>2 days ago</small>
+                <small className='commentdate'>{comment.created_at}</small>
             </div>                     
-        </div>
-        <div class="comment card p-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="user d-flex flex-row align-items-center">
-                <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"/>
-                <span><small class="font-weight-bold text-primary">james_olesenn</small> <small class="font-weight-bold">Hmm, This poster looks cool</small></span>                        
-                </div>
-                <small>2 days ago</small>
-            </div>                     
-        </div>
+        </div> )):""}</div>
+        
       <div class="setcomment bg-light p-2">
-                    <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"/><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
-                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                    <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/q52cLwE.png" width="40"/>
+                    <textarea value={FormData.comment}name="comment" onChange={e=>onChange(e)} class="form-control ml-1 shadow-none textarea"></textarea></div>
+                    <div class="mt-2 text-right" >
+                    <button class="addcommentbtn btn btn-secondary" type="button" data-bs-dismiss="modal">Zamknij</button>
+                    <button class="addcommentbtn btn btn-primary " onClick={e=> onSubmit(e)} type="button">Dodaj komentarz</button>
+                    </div>
                 </div>
      </div>
     </div>
@@ -79,5 +86,10 @@ function TaskEditPopup(props) {
 </div></>
   )
 }
+const mapStateToProps=state=>({
+    comments:state.boards.currentcomments,
+    
+    
+})
 
-export default connect(null,{update_task})(TaskEditPopup)
+export default connect(mapStateToProps,{update_task,create_comment,get_comments})(TaskEditPopup)

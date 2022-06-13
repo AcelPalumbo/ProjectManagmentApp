@@ -3,7 +3,8 @@ import *  as actiontypes from "../actions/actionTypes";
 const initialState = {
     boards: null,
     currentboard:null,
-    currentboarddetail:null
+    currentboarddetail:null,
+    currentcomments:null
 
   };
 
@@ -52,6 +53,11 @@ const initialState = {
             return{
                 ...state,
                 currentboarddetail: payload,
+           }
+        case actiontypes.GET_COMMENTS_SUCCESS:
+            return{
+                ...state,
+                currentcomments: payload,
            }
         default:
         return state

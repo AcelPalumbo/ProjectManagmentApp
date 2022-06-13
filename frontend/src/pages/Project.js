@@ -33,11 +33,12 @@ const Project =(props)=>{
         offset-md-1'>
             <h2 className='display-6'>Jesteś w projekcie : {props.project?props.project.title:""}</h2>
             <p>{props.project?props.project.description:""}</p>
+            {props.user?props.user.isAdmin ==true && <>
              <button type="button" className="projeditbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProjectModalEdit">
                         <i className="fa-solid fa-gear"></i> Edytuj
                     </button>
                     {props.project?<ProjectEditPopup project={props.project}></ProjectEditPopup>:null}
-                    
+                    </>:""}
         
         </div>
         <div className='h-100 bg-light border rounded-3 mt-5 col-md-10 
@@ -57,9 +58,10 @@ const Project =(props)=>{
             </ul>
                 <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade  p-5" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" >
+                {props.user?props.user.isAdmin ==true && <>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewBoardModal">
                         <i className="fa-solid fa-plus"></i> Nowa tablica
-                    </button>
+                    </button></>:""}
                     <div className='row col-md-12'>
                     {props.boards?props.boards.personal_boards.map((board) => (
                        <div className='card boardcart pt-2 border rounded-3 mt-4 me-1 ms-1 col-md-3' key={board.id}>
@@ -70,20 +72,22 @@ const Project =(props)=>{
                       
                       
                    </Link>
+                   {props.user?props.user.isAdmin ==true && <>
                    <button type="button" className="dlbtn btn btn-primary" 
                    data-bs-toggle="modal" data-bs-target="#BoardDeleteModal"
                    onClick={ ()=>{setDeleteBoard(board.id);setBoardName(board.title)}}
                    >
                  <i className="fa-solid fa-x"></i>
-                 </button>
+                 </button></>:""}
                  </div>
                     )):""}
                     </div>
                 </div>
                 <div className="tab-pane fade show active p-5" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" >
+                {props.user?props.user.isAdmin ==true && <>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewBoardModal">
                         <i className="fa-solid fa-plus"></i> Nowa tablica
-                    </button>
+                    </button></>:""}
                     <div className='row col-md-12'>
                     {props.boards?props.boards.project_boards.map((board) => (
                        <div className='boardcart border rounded-3 mt-4 me-1 ms-1 col-md-3 pt-2' key={board.id}>
@@ -92,12 +96,13 @@ const Project =(props)=>{
                        
                        
   </Link>
+  {props.user?props.user.isAdmin ==true && <>
   <button type="button" className="dlbtn btn btn-primary" 
   data-bs-toggle="modal" data-bs-target="#BoardDeleteModal"
   onClick={ ()=>{setDeleteBoard(board.id);setBoardName(board.title)}}
   >
 <i className="fa-solid fa-x"></i>
-</button>
+</button></>:""}
 </div>
                     )):""}
 
@@ -127,6 +132,6 @@ const mapStateToProps=state=>({
     project:state.projects.currentproject,
     isAuthenticated:state.auth.isAuthenticated,
     boards:state.boards.boards,
-    
+    user:state.auth.user,
 })
 export default connect(mapStateToProps,{load_current_project})(Project)

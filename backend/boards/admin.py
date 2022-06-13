@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Board, Task
+from .models import Board, Task,Comment
 
 class displayconntentypeobject(admin.ModelAdmin):
     fields =['owner_type', 'owner_id','owner','title','description','created_at']
@@ -11,4 +11,5 @@ class displayconntentypeobject(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Board,displayconntentypeobject)
 admin.site.register(Task)
+admin.site.register(Comment)
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
 from projects.models  import Project
+from accounts.models import User
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -32,3 +33,14 @@ class Task(models.Model):
     state = models.PositiveSmallIntegerField(choices=STATUS, default=1)
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='comments')
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField(blank=False, null=False)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.body[:50]}{"..." if len(self.body) > 50 else ""}'

@@ -42,7 +42,7 @@ body{
     font-weight: 400;
     border-radius: 1em;
     position:relative;
-    padding: 2em 1em 2em 1em;
+    padding: 1em 1em 1em 1em;
     background: #265a5c;
     color: white;
   }
@@ -105,6 +105,7 @@ body{
     border: 1px solid;
     right: 1em;
     border-radius: 3em;
+    top: 0.9em;
   }
   .taskmodal {
     background: #6d8b8d;
@@ -160,8 +161,9 @@ right: 1em
 }
 .dlbtn{
   position: absolute;
-    top: 1.2em;
-    right: 1.2em;
+  top: -0.5em;
+  right: -0.5em;
+  border-radius: 3em;
 }
 .boardh{
   background: #265a5c;
@@ -223,4 +225,25 @@ border-radius: 1em;
 .comment{
   border-radius: 1em;
   width:100%;
+}
+.addcommentbtn{
+  border-radius: 3em;
+  left:1em;
+}
+.text-right{
+  text-align: right;
+}
+.commntsdiv{
+  overflow: scroll;
+  overflow-x: hidden !important;
+  height: 12em;
+  width:90%;
+
+}
+.commentdate{
+  position: absolute;
+    right: 10px;
+    top: 1px;
+    font-size: 0.6em;
+    color: gray;
 }
