@@ -42,7 +42,7 @@ class ShortTaskSerializer(serializers.ModelSerializer):
     
 class CommentSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
-    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
     class Meta:
         model = Comment
         exclude = ['task']
