@@ -117,6 +117,7 @@ export const edit_project =(pk, title,description)=>async dispatch =>{
 
         })
         dispatch(load_current_project(pk))
+        dispatch(load_projects())
     }
     catch (error){
         dispatch({

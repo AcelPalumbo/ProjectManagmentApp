@@ -35,7 +35,7 @@ const Home = (props) => {
         
         <div className='h-100 p-5 bg-light border rounded-3 mt-5 col-md-10 
         offset-md-1'>
-            <h1 className='display-4'>Witaj w</h1>
+            <h1 className='display-6'>Witaj w</h1>
             <p className='lead'>Systemie zarządzania projektami</p>
             <hr className='my-4' />
             {props.isAuthenticated?  userstaff() : loginButton()}
@@ -54,7 +54,7 @@ const Home = (props) => {
                     >
             <i className="fa-solid fa-x"></i>
             </button></>:""}
-            
+
                 </div>
                 
                                             

@@ -17,7 +17,7 @@ body{
     background-color: #193a3b;
 }
 .projectcart{
-    width:49.2%;
+    width:48.5%;
     min-height: 150px;
     position: relative;
 }
@@ -246,4 +246,10 @@ border-radius: 1em;
     top: 1px;
     font-size: 0.6em;
     color: gray;
+}
+.nav-link{
+  color:black
+}
+.nav-link:hover,.projh3:hover{
+  color:#40989b;
 }

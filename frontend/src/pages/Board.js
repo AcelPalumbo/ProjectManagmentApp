@@ -96,7 +96,7 @@ const Board =(props)=>{
                        
                        <div className='taskCard mb-3 bg-light p-4'  key={task.id} >
                            <div className='task'>
-                     <h1 onClick={()=>{setTask(task)}} data-bs-toggle="modal" data-bs-target="#TaskModalEdit">{task.title}</h1>
+                     <h1 onClick={()=>{setTask(task); props.get_comments(task.id)}} data-bs-toggle="modal" data-bs-target="#TaskModalEdit">{task.title}</h1>
                     </div>
                     <select className='custom-select' value={task.state} name={task.id} onChange={e => onChange(e)}>
                         <option value="1">🔴</option>
@@ -116,7 +116,7 @@ const Board =(props)=>{
                        
                        <div className='taskCard mb-3 bg-light p-4'  key={task.id} >
                            <div className='task'>
-                     <h1 onClick={()=>{setTask(task)}} data-bs-toggle="modal" data-bs-target="#TaskModalEdit">{task.title}</h1>
+                     <h1 onClick={()=>{setTask(task); props.get_comments(task.id)}} data-bs-toggle="modal" data-bs-target="#TaskModalEdit">{task.title}</h1>
                     </div>
                     <select className='custom-select' value={task.state} name={task.id} onChange={e => onChange(e)}>
                         <option value="1">🔴</option>
