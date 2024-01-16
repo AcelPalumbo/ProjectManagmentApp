@@ -17,7 +17,7 @@ const RegisterPage = () => {
     const onChange = e =>setFormData({...FormData, [e.target.name]: e.target.value})
 
     const onSubmit = e =>{
-        //console.log("submit")
+        console.log("submit")
     e.preventDefault();
   
 }

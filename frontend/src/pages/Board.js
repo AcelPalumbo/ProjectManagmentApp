@@ -45,6 +45,7 @@ const Board =(props)=>{
             <div className='boardh h-100 pt-3 pb-3 pr-5 ps-5 mt-5 col-md-10 
         offset-md-1'>
             <h2 className='display-6'>Jesteś w tablicy : {props.boarddetails?props.boarddetails.title:""}</h2>
+            
             <p>{props.boarddetails?props.boarddetails.description:""}</p>
             {props.user?props.user.isAdmin ==true && <>
              <button type="button" className="boardeditbtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#BoardModalEdit">

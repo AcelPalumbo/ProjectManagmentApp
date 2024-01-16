@@ -19,7 +19,7 @@ const Home = (props) => {
     )
     const userstaff=()=>(
         <>
-            {props.user?props.user.isAdmin ==true && <>
+            {props.user ? props.user.isAdmin ==true && <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NewProjectModal">
             <i className="fa-solid fa-plus"></i> Nowy Projekt
             </button>
